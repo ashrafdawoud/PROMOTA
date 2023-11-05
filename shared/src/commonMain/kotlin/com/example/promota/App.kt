@@ -1,14 +1,18 @@
 package com.example.promota
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.painter.Painter
-import com.example.promota.dashboard.presentaion.DashboardScreen
-import com.example.promota.utils.presentation.PromotaTheme
-import org.jetbrains.compose.resources.painterResource
+import com.example.promota.presentation.navigation.NavHost
+import com.example.promota.presentation.utils.components.BaseNavigationScreen
+import com.example.promota.presentation.utils.theme.PromotaTheme
 
 @Composable
 fun App() {
     PromotaTheme {
-        DashboardScreen()
+        BaseNavigationScreen{
+            NavHost.navigate()
+        }
     }
 }
+
+expect fun userNotificationCenter()
+

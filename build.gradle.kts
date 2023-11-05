@@ -7,6 +7,9 @@ plugins {
     id("org.jetbrains.compose").version("1.5.0").apply(false)
 }
 
+allprojects {
+    apply(plugin = "kotlinx-atomicfu")
+}
 buildscript {
     repositories {
         gradlePluginPortal()
@@ -14,6 +17,7 @@ buildscript {
 
     dependencies {
         classpath("dev.icerock.moko:resources-generator:0.23.0")
+        classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.17.3")
     }
 }
 
