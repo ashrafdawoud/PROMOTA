@@ -1,16 +1,23 @@
 PODS:
+  - MercariQRScanner (1.9.0)
   - shared (1.0)
 
 DEPENDENCIES:
+  - MercariQRScanner
   - shared (from `../shared`)
+
+SPEC REPOS:
+  trunk:
+    - MercariQRScanner
 
 EXTERNAL SOURCES:
   shared:
     :path: "../shared"
 
 SPEC CHECKSUMS:
+  MercariQRScanner: e5aea873969af59b09b4cc411fc1c5b6293dba44
   shared: 127df190ceb5435a70bd50987bdedc2dc0030f7b
 
-PODFILE CHECKSUM: f282da88f39e69507b0a255187c8a6b644477756
+PODFILE CHECKSUM: 66d2dedca50821d67ada25fb5e3d0bd9f8f8d21f
 
 COCOAPODS: 1.13.0

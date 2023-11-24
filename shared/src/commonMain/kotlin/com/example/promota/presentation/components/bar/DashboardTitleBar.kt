@@ -1,4 +1,4 @@
-package com.example.promota.presentation.screens.dashboard.components
+package com.example.promota.presentation.components.bar
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

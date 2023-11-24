@@ -40,7 +40,6 @@ kotlin {
                 implementation(compose.material3)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-                implementation("io.github.oleksandrbalan:lazytable:1.5.0")
             }
         }
         val commonTest by getting {

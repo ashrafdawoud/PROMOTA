@@ -14,8 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.promota.presentation.components.table.ScrollableTable
-import com.example.promota.presentation.screens.dashboard.components.PeriodSelectorBar
+import com.example.promota.presentation.components.table.TableView
+import com.example.promota.presentation.components.bar.PeriodSelectorBar
 
 @Composable
 fun BestSellerCard() {
@@ -46,7 +46,7 @@ fun BestSellerCard() {
             containerElevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             containerContentColor = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.onPrimary)
         )
-        ScrollableTable(
+        TableView(
             columnHeader,
             tableDate,
             onClickEnabled = true,

@@ -1,0 +1,13 @@
+package com.example.promota
+
+import androidx.compose.ui.window.ComposeUIViewController
+import platform.Foundation.NSUUID.Companion.UUID
+import platform.UserNotifications.UNMutableNotificationContent
+import platform.UserNotifications.UNNotificationPresentationOptionAlert
+import platform.UserNotifications.UNNotificationPresentationOptionSound
+import platform.UserNotifications.UNNotificationRequest.Companion.requestWithIdentifier
+import platform.UserNotifications.UNNotificationSound
+import platform.UserNotifications.UNTimeIntervalNotificationTrigger
+import platform.UserNotifications.UNUserNotificationCenter
+
+fun MainViewController() = ComposeUIViewController { App() }

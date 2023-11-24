@@ -43,7 +43,8 @@ private val LightColorScheme = lightColorScheme(
     onTertiary = lightMove,
     tertiaryContainer = darkOrange,
     onTertiaryContainer = lightOrange,
-    outline = black
+    outline = black,
+    surfaceVariant = red
 )
 private val DarkColorScheme = darkColorScheme(
     primary = white,

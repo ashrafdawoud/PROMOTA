@@ -5,13 +5,21 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsetsController
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import com.example.promota.MainView
-
+import com.example.promota.presentation.navigation.NavHost
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                NavHost.navigationViewModel.popUp()
+            }
+        }
+        onBackPressedDispatcher.addCallback(onBackPressedCallback)
         setStatusBarColorToDarkerShadeOfBackgroundColor()
         setContent {
             MainView()
@@ -27,8 +35,6 @@ class MainActivity : ComponentActivity() {
             )
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.statusBarColor = Color.WHITE
-        } else {
-
         }
     }
 }

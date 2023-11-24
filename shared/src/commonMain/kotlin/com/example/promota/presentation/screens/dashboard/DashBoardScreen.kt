@@ -7,25 +7,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
-import androidx.compose.ui.input.nestedscroll.NestedScrollSource
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
-import com.example.promota.presentation.components.table.CellBackgroundColor
-import com.example.promota.presentation.components.table.ScrollableTable
-import com.example.promota.presentation.screens.dashboard.components.DashboardTitleBar
-import com.example.promota.presentation.screens.dashboard.components.PeriodSelectorBar
+import com.example.promota.presentation.components.bar.DashboardTitleBar
+import com.example.promota.presentation.components.bar.PeriodSelectorBar
 import com.example.promota.presentation.screens.dashboard.components.statistics.BestSellerCard
 import com.example.promota.presentation.screens.dashboard.components.statistics.StatisticsSection
 import com.example.promota.presentation.screens.dashboard.components.statistics.TransactionsCard
-import kotlin.math.log
 
 @Composable
 fun DashboardScreen() {
@@ -45,9 +34,7 @@ fun DashboardScreen() {
                 Spacer(Modifier.height(6.dp))
             }
             item {
-                val textStyle = listOf(CellBackgroundColor(3, 2, MaterialTheme.colorScheme.surface))
-                ScrollableTable(columnHeaders, tableData, textStyle, onClickEnabled = true,{})
-               //TransactionsCard()
+                TransactionsCard()
                 Spacer(Modifier.height(6.dp))
             }
             item {

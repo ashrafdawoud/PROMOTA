@@ -12,10 +12,10 @@ import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -25,22 +25,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ScrollableTable(
+fun TableView(
     columnHeaders: List<String>,
     tableData: List<List<String>>,
-    textStyle: List<CellBackgroundColor> = listOf(),
+    cellStyle: List<CellBackgroundColor> = listOf(),
     onClickEnabled: Boolean,
     onclick: (String) -> Unit,
 ) {
     val state = rememberScrollState()
     Column {
-        HeaderItem(columnHeaders , state)
-        TableItems(tableData = tableData, state)
+        HeaderItem(columnHeaders, state)
+        TableItems(
+            tableData = tableData,
+            state = state,
+            cellStyle = cellStyle
+        )
     }
 }
 
 @Composable
-fun HeaderItem(columnHeaders: List<String>, state: ScrollState) {
+private fun HeaderItem(columnHeaders: List<String>, state: ScrollState) {
     Row(
         modifier = Modifier
             .horizontalScroll(state)
@@ -67,7 +71,11 @@ fun HeaderItem(columnHeaders: List<String>, state: ScrollState) {
 }
 
 @Composable
-fun TableItems(tableData: List<List<String>>, state: ScrollState) {
+private fun TableItems(
+    tableData: List<List<String>>,
+    state: ScrollState,
+    cellStyle: List<CellBackgroundColor>,
+) {
     val mCustomTextSelectionColors = TextSelectionColors(
         handleColor = Color.Red,
         backgroundColor = Color.Yellow,
@@ -77,25 +85,58 @@ fun TableItems(tableData: List<List<String>>, state: ScrollState) {
             .horizontalScroll(state)
             .background(color = MaterialTheme.colorScheme.onPrimary)
     ) {
-        tableData.forEach {
+        tableData.forEachIndexed { rowIndex, row ->
             Row {
-                it.forEach { it1 ->
+                row.forEachIndexed { columnIndex, column ->
                     SelectionContainer {
                         CompositionLocalProvider(LocalTextSelectionColors provides mCustomTextSelectionColors) {
-                            Text(
-                                text = it1,
-                                modifier = Modifier
-                                    .width(140.dp)
-                                    .padding(vertical = 5.dp, horizontal = 5.dp)
-                                    .align(Alignment.CenterVertically),
-                                textAlign = TextAlign.Center,
-                                style = MaterialTheme.typography.bodySmall.copy(fontSize = 14.sp),
-                                color = MaterialTheme.colorScheme.outline
-                            )
+                            setBackground(column, rowIndex, columnIndex, cellStyle)
                         }
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+private fun setBackground(
+    column: String,
+    rowIndex: Int,
+    columnIndex: Int,
+    cellStyle: List<CellBackgroundColor>
+) {
+    if (cellStyle.isEmpty())
+        Text(
+            text = column,
+            modifier = Modifier
+                .width(140.dp)
+                .padding(vertical = 5.dp, horizontal = 5.dp),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodySmall.copy(fontSize = 14.sp),
+            color = MaterialTheme.colorScheme.outline
+        )
+    else
+        cellStyle.forEach {
+            if (it.column == columnIndex && it.row == rowIndex)
+                Text(
+                    text = column,
+                    modifier = Modifier
+                        .width(140.dp)
+                        .background(color = it.backgroundColor, shape = ShapeDefaults.Medium)
+                        .padding(vertical = 5.dp, horizontal = 5.dp),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 14.sp),
+                    color = it.textColor,
+                )
+            else Text(
+                text = column,
+                modifier = Modifier
+                    .width(140.dp)
+                    .padding(vertical = 5.dp, horizontal = 5.dp),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodySmall.copy(fontSize = 14.sp),
+                color = MaterialTheme.colorScheme.outline
+            )
+        }
 }

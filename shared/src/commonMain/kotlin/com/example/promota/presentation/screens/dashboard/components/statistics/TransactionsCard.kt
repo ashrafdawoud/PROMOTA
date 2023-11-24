@@ -15,28 +15,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.promota.presentation.components.table.CellBackgroundColor
-import com.example.promota.presentation.components.table.ScrollableTable
+import com.example.promota.presentation.components.table.TableView
 import com.example.promota.presentation.screens.dashboard.columnHeaders
-import com.example.promota.presentation.screens.dashboard.components.PeriodSelectorBar
+import com.example.promota.presentation.components.bar.PeriodSelectorBar
 import com.example.promota.presentation.screens.dashboard.tableData
 
 @Composable
 fun TransactionsCard() {
-    val textStyle = listOf(CellBackgroundColor(3, 2, MaterialTheme.colorScheme.surface))
+    val textStyle = listOf(
+        CellBackgroundColor(
+            3,
+            2,
+            MaterialTheme.colorScheme.surface,
+            MaterialTheme.colorScheme.onSurface
+        )
+    )
     Column(
-        modifier = Modifier.background(MaterialTheme.colorScheme.outline)
+        modifier = Modifier.background(MaterialTheme.colorScheme.onPrimary)
             .padding(top = 10.dp)
     ) {
         Row(modifier = Modifier.padding(horizontal = 5.dp)) {
-            Text("Recent Transaction", modifier = Modifier.weight(1F))
+            Text(
+                "Recent Transaction",
+                modifier = Modifier.weight(1F),
+                color = MaterialTheme.colorScheme.outline
+            )
             Text(
                 "Last 5",
                 modifier = Modifier.background(
                     MaterialTheme.colorScheme.tertiary,
-                    shape = MaterialTheme.shapes.large
+                    shape = MaterialTheme.shapes.large,
                 )
                     .padding(horizontal = 15.dp, vertical = 4.dp),
-                color = MaterialTheme.colorScheme.outline,
+                color = MaterialTheme.colorScheme.onPrimary,
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp)
             )
         }
@@ -50,6 +61,6 @@ fun TransactionsCard() {
             containerElevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             containerContentColor = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.outline)
         )
-        ScrollableTable(columnHeaders, tableData, textStyle, onClickEnabled = true) {}
+        TableView(columnHeaders, tableData, textStyle, onClickEnabled = true) {}
     }
 }

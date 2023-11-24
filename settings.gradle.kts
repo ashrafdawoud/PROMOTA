@@ -36,3 +36,5 @@ dependencyResolutionManagement {
 rootProject.name = "PROMOTA"
 include(":androidApp")
 include(":shared")
+include(":iosMain")
+include(":notification-liberary")

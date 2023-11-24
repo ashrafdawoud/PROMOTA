@@ -1,4 +1,4 @@
-package com.example.promota.presentation.screens.categories.component.categoryTabs
+package com.example.promota.presentation.screens.categories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -6,13 +6,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,6 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.promota.presentation.components.bar.DashboardTitleBar
+import com.example.promota.presentation.navigation.NavHost
+import com.example.promota.presentation.navigation.State
 import com.example.promota.presentation.utils.theme.darkBlue
 import com.example.promota.presentation.utils.theme.lightBlue
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -41,21 +44,24 @@ fun CategoryTabsGrid() {
         Pair("Reports", "drawable/reports.png"),
         Pair("Settings", "drawable/settings.png"),
     )
-    LazyVerticalGrid(
-        modifier = Modifier.fillMaxWidth().height((90*(categoryItems.size/3)).dp),
-        columns = GridCells.Fixed(3),
-        userScrollEnabled = false
-    ) {
-        categoryItems.forEach { item ->
-            item {
-                CategoryTab(item.second, item.first)
+    Column {
+        DashboardTitleBar()
+        LazyVerticalGrid(
+            modifier = Modifier.fillMaxWidth(),
+            columns = GridCells.Fixed(3),
+            userScrollEnabled = false
+        ) {
+            categoryItems.forEach { item ->
+                item {
+                    CategoryTab(item.second, item.first)
+                }
             }
         }
     }
 }
 
 
-@OptIn(ExperimentalResourceApi::class)
+@OptIn(ExperimentalResourceApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun CategoryTab(
     image: String,
@@ -66,7 +72,8 @@ fun CategoryTab(
             .padding(5.dp)
             .size(90.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.outline),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.onPrimary),
+        onClick = {NavHost.navigationViewModel.setState(State(NavHost.ProductsScreen))}
     ) {
         Column(
             modifier = Modifier.padding(5.dp).fillMaxSize(),
