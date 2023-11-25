@@ -6,7 +6,7 @@ plugins {
     id("signing")
 }
 group = "com.example.notifypro"
-version = "1.1.5"
+version = "1.1.7"
 publishing {
     repositories {
         maven {
@@ -66,9 +66,4 @@ android {
     defaultConfig {
         minSdk = 24
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
 }
