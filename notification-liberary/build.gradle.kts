@@ -6,12 +6,16 @@ plugins {
     id("signing")
 }
 group = "com.example.notifypro"
-version = "1.0"
+version = "1.1.5"
 publishing {
     repositories {
         maven {
             name = "NotifyProPackages"
-            url = uri("https://maven.pkg.github.com/ashrafdawoud/NotifyPro")
+            url = uri("https://maven.pkg.github.com/ashrafdawoud/PROMOTA")
+            credentials {
+                username = "ashrafdawoud"
+                password = "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"
+            }
         }
     }
 }
@@ -25,6 +29,8 @@ kotlin {
                 jvmTarget = "1.8"
             }
         }
+        publishLibraryVariantsGroupedByFlavor = true
+        publishLibraryVariants("release", "debug")
     }
     iosX64()
     iosArm64()
@@ -39,7 +45,7 @@ kotlin {
             baseName = "notification-liberary"
         }
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -60,4 +66,9 @@ android {
     defaultConfig {
         minSdk = 24
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
 }

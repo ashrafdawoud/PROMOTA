@@ -1,7 +1,3 @@
 package com.example.notification_liberary
 
-class Notification {
-    companion object{
-        val id  = "dawoud"
-    }
-}
+fun getPlatform() = "ashraf dawoud"
